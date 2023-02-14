@@ -27,7 +27,7 @@ export default function PanelGroup({ titles, side }: PanelGroupProps) {
         {!isOpen ?
         (<a
             onClick={buttonHandler}
-            className={isActive === "" ? "hidden" : "fixed rotatepx-10 py-4 text-black-600 bg-white rounded shadow ease-in-out duration-300"}
+            className={isActive === "" ? "hidden" : `absolute top-40  px-2 py-2 text-black-600 bg-white rounded shadow' ${side === "left" ? '-left-3 rotate-90'  : '-right-3 -rotate-90' }`}
           >{isActive}
         </a>) :
         (<Panel id={title} title={title} buttonHandler={buttonHandler} state={isActive}>     
