@@ -1,98 +1,75 @@
-import { ChangeEventHandler, SetStateAction, useState } from "react";
+import { ChangeEventHandler, ReactNode, useState } from "react";
 import Panel from "./panel";
-import DropDown from "./DropDown";
+import DropDown from "~/components/shared/DropDown";
+import React from "react";
 
 type PanelGroupProps = {
-  titles: string[];
   side: string;
+  options: string[];
+  children: ReactNode;
 };
 
-export default function PanelGroup({ titles, side }: PanelGroupProps) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isActive, setIsActive] = useState("");
-    const buttonHandler = () => {
-        setIsOpen(!isOpen)
+export default function PanelGroup({
+  side,
+  options,
+  children,
+}: PanelGroupProps) {
+  const [isActive, setIsActive] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const modifiedChildren = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        ...child.props,
+        active: isActive,
+        children:child.props.children,
+      });
     }
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setIsActive(event.target.value);
-        setIsOpen(true);
-    }
+    return null;
+  });
+
+  console.log(modifiedChildren);
+  const buttonHandler = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setIsActive(event.target.value);
+    setIsOpen(true);
+  };
   return (
     <>
-    <DropDown options={titles} handleChange={handleChange}/>
-    
-
-        {titles.map((title) =>  
-        <>       
-        {!isOpen ?
-        (<a
+      <DropDown handleChange={handleChange} options={options} />
+      <div>
+        {!isOpen ? (
+          <div
+            className="absolute transform border-r-gray-200 bg-white px-2"
             onClick={buttonHandler}
-            className={isActive === "" ? "hidden" : `absolute top-40  px-2 py-2 text-black-600 bg-white rounded shadow' ${side === "left" ? '-left-3 rotate-90'  : '-right-3 -rotate-90' }`}
-          >{isActive}
-        </a>) :
-        (<Panel id={title} title={title} buttonHandler={buttonHandler} state={isActive}>     
-          <h2 className="font-bold">Lorem ipsum</h2>
-          <p>Lorem ipsum dolor sit amet...</p>
-          <table>
-            <thead>
-              <tr>
-                <th>List</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[1, 2, 3, 4].map((i) => (
-                <tr key={i}>
-                  <td>Item {i}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Panel>
-        )}</>
-    )
-    }
+          >
+            {isActive}
+          </div>
+        ) : (
+          <>
+            <svg
+              className="float-right h-8"
+              onClick={buttonHandler}
+              fill="none"
+              stroke="black"
+              strokeWidth=".5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+            <div>{modifiedChildren}</div>
+          </>
+        )}
+      </div>
     </>
   );
 }
-
-
-// export default function PanelGroup({ titles, side }: PanelGroupProps) {
-//     const [isOpen, setIsOpen] = useState(false);
-//     const [isActive, setIsActive] = useState(""); 
-//     const buttonHandler = () => {
-//         setIsOpen(!isOpen)
-//     }
-//     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//         setIsActive(event.target.value);
-//     }
-//   return (
-//     <>
-//     <DropDown options={titles} handleChange={handleChange}/>     
-//         {!isOpen ?
-//         (<a
-//             onClick={buttonHandler}
-//             className="fixed px-10 py-4 text-black-600 bg-white rounded shadow rotate-90"
-//           >{isActive}
-//         </a>) :
-//         (<Panel id={isActive} title={isActive} buttonHandler={buttonHandler}>     
-//           <h2 className="font-bold">Lorem ipsum</h2>
-//           <p>Lorem ipsum dolor sit amet...</p>
-//           <table>
-//             <thead>
-//               <tr>
-//                 <th>List</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {[1, 2, 3, 4].map((i) => (
-//                 <tr key={i}>
-//                   <td>Item {i}</td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </Panel>
-//         )}
-//     </>
-//   );
-// }
