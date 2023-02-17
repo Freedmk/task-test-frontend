@@ -1,21 +1,20 @@
 import PanelGroup from '~/components/shared/panelGroup';
 import Panel from '~/components/shared/panel';
+import DropDown from '~/components/shared/DropDown';
 import { useState } from 'react';
 
 export default function Index() {
-  
+    // const [dropDownSelect, setDropDownSelect] = useState<string | null>(null);
     const title_l = ['First', 'Second', 'Third'];
     const title_r = ['First R', 'Second R', 'Third R'];
-    const [changedState, setChangedState] = useState('First');
-    const [changedSide, setChangedSide] = useState('left');
-
+    const titles = ['First', 'Second R'];
     return (
         <div className="flex h-full w-full flex-col">
             <div className="h-16 flex-shrink border-b border-b-gray-200"></div>
-            <div className="flex-shring h-8 border-b border-b-gray-200"></div>
+            <div className="h-8 flex-shrink border-b border-b-gray-200"></div>
             <div className="flex h-full flex-grow flex-row">
-                <div className="flex-shrink bg-gray-50">
-                    <PanelGroup key="Left" side="left" options={title_l}>
+                <div className="w-56 bg-gray-50">
+                    <PanelGroup key="Left" side="left" options={title_l} >
                         <Panel key="First" id="First" active="">
                             <h2 className="font-bold">Lorem ipsum</h2>
                             <p>Lorem ipsum dolor sit amet...</p>
@@ -58,10 +57,11 @@ export default function Index() {
                     </PanelGroup>
                 </div>
                 <div className="flex-grow bg-gray-50">
-                    <div className="relative w-full flex-shrink justify-center space-x-16 lg:max-w-sm"></div>
+                    <div className="relative w-full flex-shrink justify-center space-x-16 lg:max-w-sm">
+                    </div>
                 </div>
-                <div className="flex-shrink bg-gray-50">
-                <PanelGroup key="Left" side="left" options={title_r}>
+                <div className="w-56 bg-gray-50">
+                    <PanelGroup key="Right" side="right" options={title_r} >
                         <Panel key="First R" id="First R" active="">
                             <h2 className="font-bold">Lorem ipsum</h2>
                             <p>Lorem ipsum dolor sit amet...</p>
@@ -95,7 +95,6 @@ export default function Index() {
                             <h2 className="font-bold">Lorem ipsum</h2>
                             <p>Lorem ipsum dolor sit amet...</p>
                             <table>
-
                                 <tbody>
                                     {[1, 2, 3, 4].map((i) => (
                                         <tr key={i}>

@@ -1,6 +1,5 @@
-import { ChangeEventHandler, ReactNode, useState } from "react";
-import Panel from "./panel";
-import DropDown from "~/components/shared/DropDown";
+import { ReactNode, useState } from "react";
+import DropDown from "./DropDown";
 import React from "react";
 
 type PanelGroupProps = {
@@ -39,15 +38,15 @@ export default function PanelGroup({
   };
   return (
     <>
-      <DropDown handleChange={handleChange} options={options} />
+      <DropDown handleChange={handleChange} options={options}/>
       <div>
         {!isOpen ? (
-          <div
-            className="absolute transform border-r-gray-200 bg-white px-2"
+          <a
+            className={isActive === "" ? "hidden" : `absolute top-40  px-2 py-2 text-black-600 bg-white rounded shadow' ${side === "left" ? '-left-3 rotate-90'  : '-right-3 -rotate-90' }`}
             onClick={buttonHandler}
           >
             {isActive}
-          </div>
+          </a>
         ) : (
           <>
             <svg
@@ -66,7 +65,7 @@ export default function PanelGroup({
                 d="M6 18L18 6M6 6l12 12"
               ></path>
             </svg>
-            <div>{modifiedChildren}</div>
+            <div className="h-full">{modifiedChildren}</div>
           </>
         )}
       </div>
