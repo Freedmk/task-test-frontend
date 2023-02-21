@@ -45,4 +45,3 @@ export default function DropDown({
   );
 }
 
-{/* <div className={`relative lg:max-w-sm w-18 ${side === "left" ? "float-left": "float-right"}`}> */}
