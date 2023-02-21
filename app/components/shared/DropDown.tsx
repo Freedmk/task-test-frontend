@@ -5,13 +5,15 @@ type DropDownProps = {
   options: string[];
   selectedOption?: string;
   side?: string;
+  onSide?: string
 };
 
 export default function DropDown({
   options,
   onChangeHandler,
   selectedOption,
-  side
+  side,
+  onSide
 }: DropDownProps) {
   const [selectedValue, setSelectedValue] = useState(selectedOption || "");
 
@@ -25,7 +27,12 @@ export default function DropDown({
   const handleChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
     const selectedValue = event.target.value;
     setSelectedValue(selectedValue);
-    onChangeHandler(selectedValue);
+    if(onSide){
+      onChangeHandler(selectedValue, onSide);
+    }else{
+      onChangeHandler(selectedValue);
+    }
+    
   };
 
   return (

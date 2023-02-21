@@ -8,6 +8,7 @@ type PanelGroupProps = {
   children: ReactNode;
   selectedOption?: string;
   active?: string;
+  selectedSide?: string;
 };
 
 export default function PanelGroup({
@@ -16,9 +17,10 @@ export default function PanelGroup({
   children,
   selectedOption,
   active,
+  selectedSide
 }: PanelGroupProps) {
   const [isActive, setIsActive] = useState(active);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(active ? true : false);
 
   const modifiedChildren = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
@@ -35,7 +37,7 @@ export default function PanelGroup({
     setIsOpen(!isOpen);
   };
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: string, onSide?: string) => {
     setIsActive(value);
     setIsOpen(true);
   };
@@ -51,7 +53,7 @@ export default function PanelGroup({
         <DropDown
           onChangeHandler={handleChange}
           options={options}
-          selectedOption={selectedOption}
+          selectedOption={selectedSide === side ? selectedOption : undefined}
           side={side}
         />
         <svg
