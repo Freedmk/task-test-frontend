@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 export default function Index() {
     const [dropDownSelect, setDropDownSelect] = useState<string | undefined>(undefined);
-    const title_l = ['First', 'Second', 'Third'];
-    const title_r = ['First R', 'Second R', 'Third R'];
-    const titles = ['First', 'Second', 'Third'];
+    const title_l = ['Longer Name', 'Second', 'Third'];
+    const title_r = ['Rightside check', 'Second R', 'Third R'];
+    const titles = ['Longer Name', 'Second', 'Third'];
 
     const selectHandler = (value: string) => {
         setDropDownSelect(value);
@@ -18,8 +18,8 @@ export default function Index() {
             <div className="h-8 flex-shrink border-b border-b-gray-200"></div>
             <div className="flex h-full flex-grow flex-row">
                 <div className="w-56 bg-gray-50 h-full">
-                    <PanelGroup key="Left" side="left" options={title_l} selectedOption={dropDownSelect} active="First">
-                        <Panel key="First" id="First" active="">
+                    <PanelGroup key="Left" side="left" options={title_l} selectedOption={dropDownSelect} active="Longer Name">
+                        <Panel key="First" id="Longer Name" active="">
                             <h2 className="font-bold">Lorem ipsum</h2>
                             <p>Lorem ipsum dolor sit amet...</p>
                             <table>
@@ -67,7 +67,7 @@ export default function Index() {
                 </div>
                 <div className="w-56 bg-gray-50 h-full">
                     <PanelGroup key="Right" side="right" options={title_r} >
-                        <Panel key="First R" id="First R" active="">
+                        <Panel key="First R" id="Rightside check" active="">
                             <h2 className="font-bold">Lorem ipsum</h2>
                             <p>Lorem ipsum dolor sit amet...</p>
                             <table>

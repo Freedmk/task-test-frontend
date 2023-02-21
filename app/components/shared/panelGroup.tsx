@@ -64,7 +64,7 @@ export default function PanelGroup({
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           style={{
-            marginLeft: "112px",
+            marginLeft: "auto",
           }}
         >
           <path
@@ -78,16 +78,15 @@ export default function PanelGroup({
         {!isOpen ? (
           <a
             className={
-              isActive === ""
+              isActive === undefined
                 ? "hidden"
                 : `text-black-600 absolute rounded bg-white px-2 py-2 shadow ${
                     side === "left"
-                      ? "-left-3 rotate-90"
-                      : "-right-4 -rotate-90"
+                      ? " rotate-90 origin-bottom-left"
+                      : "-right-2 -rotate-90 origin-bottom-right"
                   }`
             }
             onClick={buttonHandler}
-            style={{ marginTop: "60px" }}
           >
             {isActive}
           </a>
