@@ -8,7 +8,6 @@ export default function Index() {
     const [isSide, setIsSide] = useState("right");
     const title_l = ['Longer Name', 'Second', 'Third'];
     const title_r = ['Rightside Check', 'Second R', 'Third R'];
-    const titles = ['Longer Name', 'Second', 'Third'];
 
     const selectHandler = (value: string, onSide?: string) => {
         setDropDownSelect(value);
@@ -68,6 +67,7 @@ export default function Index() {
                 <div className="flex-grow bg-gray-50">
                     <div className="relative w-full flex-shrink justify-center space-x-16 lg:max-w-sm">
                         <DropDown onChangeHandler={selectHandler} options={title_r} onSide="right"/>
+                        <DropDown onChangeHandler={selectHandler} options={title_l} onSide="left"/>
                     </div>
                 </div>
                 <div className="w-56 bg-gray-50 h-full">
