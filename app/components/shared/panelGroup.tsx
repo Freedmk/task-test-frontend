@@ -7,6 +7,7 @@ type PanelGroupProps = {
   options: string[];
   children: ReactNode;
   selectedOption?: string;
+  active?: string;
 };
 
 export default function PanelGroup({
@@ -14,8 +15,9 @@ export default function PanelGroup({
   options,
   children,
   selectedOption,
+  active,
 }: PanelGroupProps) {
-  const [isActive, setIsActive] = useState("");
+  const [isActive, setIsActive] = useState(active);
   const [isOpen, setIsOpen] = useState(false);
 
   const modifiedChildren = React.Children.map(children, (child) => {
@@ -28,27 +30,32 @@ export default function PanelGroup({
     }
     return null;
   });
+
   const buttonHandler = () => {
     setIsOpen(!isOpen);
   };
 
   const handleChange = (value: string) => {
-    console.log(value);
     setIsActive(value);
     setIsOpen(true);
   };
-  console.log(isActive);
 
   return (
     <>
-      <div className={isOpen ? "flex bg-white" : ""}>
+      <div
+        className={isOpen ? "flex h-12 w-56 bg-white" : "h-12 w-56"}
+        style={{
+          justifyContent: side === "left" ? "flex-start" : `${!isOpen ? "flex-end" : "flex-start"}`,
+        }}
+      >
         <DropDown
           onChangeHandler={handleChange}
           options={options}
           selectedOption={selectedOption}
+          side={side}
         />
         <svg
-          className={isOpen ? "right-10 h-5 bg-white" : "hidden"}
+          className={isOpen ? "h-6 bg-white" : "hidden"}
           onClick={buttonHandler}
           fill="none"
           stroke="black"
@@ -56,6 +63,9 @@ export default function PanelGroup({
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
+          style={{
+            marginLeft: "112px",
+          }}
         >
           <path
             strokeLinecap="round"
@@ -64,25 +74,25 @@ export default function PanelGroup({
           ></path>
         </svg>
       </div>
-
-      <div>
+      <div className="relative mt-auto h-full flex-grow">
         {!isOpen ? (
           <a
             className={
               isActive === ""
                 ? "hidden"
-                : `text-black-600 shadow'  absolute top-40 rounded bg-white px-2 py-2 ${
+                : `text-black-600 absolute rounded bg-white px-2 py-2 shadow ${
                     side === "left"
                       ? "-left-3 rotate-90"
                       : "-right-4 -rotate-90"
                   }`
             }
             onClick={buttonHandler}
+            style={{ marginTop: "60px" }}
           >
             {isActive}
           </a>
         ) : (
-          <div className="h-full">{modifiedChildren}</div>
+          <>{modifiedChildren}</>
         )}
       </div>
     </>

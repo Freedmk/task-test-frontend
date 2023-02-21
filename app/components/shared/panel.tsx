@@ -8,7 +8,7 @@ interface PanelProps {
 export default function Panel({ children, id, active }: PanelProps) {
   return (
     <div
-      className={id === active ? "h-full w-56 flex-shrink border-r border-r-gray-200 bg-white" : "hidden"
+      className={id === active ? "h-full border-r-gray-200 bg-white" : "hidden"
 
       }
     >

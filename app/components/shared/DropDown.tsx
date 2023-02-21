@@ -4,12 +4,14 @@ type DropDownProps = {
   onChangeHandler: (selectedValue: string) => void;
   options: string[];
   selectedOption?: string;
+  side?: string;
 };
 
 export default function DropDown({
   options,
   onChangeHandler,
   selectedOption,
+  side
 }: DropDownProps) {
   const [selectedValue, setSelectedValue] = useState(selectedOption || "");
 
@@ -27,7 +29,7 @@ export default function DropDown({
   };
 
   return (
-    <div className="relative w-24 flex-shrink lg:max-w-sm">
+    <div className={`relative lg:max-w-sm w-28 ${side === "left" ? "float-left": "float-right"}`}>
       <select
         value={selectedValue}
         onChange={handleChange}
@@ -42,3 +44,5 @@ export default function DropDown({
     </div>
   );
 }
+
+{/* <div className={`relative lg:max-w-sm w-18 ${side === "left" ? "float-left": "float-right"}`}> */}
