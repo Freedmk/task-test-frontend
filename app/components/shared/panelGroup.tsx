@@ -2,6 +2,16 @@ import { ChangeEventHandler, ReactNode, useState } from "react";
 import DropDown from "./DropDown";
 import React from "react";
 
+{/*
+* PanelGroup is  used to group and manage a set of Panel comonents  
+* side: Specifies the side of the page the panel group should be displayed on 
+* options: an array of string that represents the options that should be shown in the dropdown for the panel group
+* children: X of Child components that should be Panels
+* selectedOption: The default dropdown select if recieved from mouse event in another component
+* active: specifies which Panel should be initially displayed
+* selectedSide: Specifies if the selected option should be used on current side
+* clearSelected: function pointer to clear current selectedOption in parent component after Panel Group updates
+*/}
 type PanelGroupProps = {
   side: string;
   options: string[];

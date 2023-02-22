@@ -1,5 +1,10 @@
 import { MouseEventHandler, type ReactNode } from "react";
 
+{/* Panel displays a single Panel
+*  id: String that specifies the Panel
+*  children: child components of Panel
+*  active: String that specifies what the currently active Panel is
+*/}
 interface PanelProps {
   id: string;
   children: ReactNode;
