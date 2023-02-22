@@ -9,6 +9,7 @@ type PanelGroupProps = {
   selectedOption?: string;
   active?: string;
   selectedSide?: string;
+  clearSelected: ()=>void;
 };
 
 export default function PanelGroup({
@@ -17,7 +18,8 @@ export default function PanelGroup({
   children,
   selectedOption,
   active,
-  selectedSide
+  selectedSide,
+  clearSelected
 }: PanelGroupProps) {
   const [isActive, setIsActive] = useState(active);
   const [isOpen, setIsOpen] = useState(active ? true : false);
@@ -40,6 +42,8 @@ export default function PanelGroup({
   const handleChange = (value: string, onSide?: string) => {
     setIsActive(value);
     setIsOpen(true);
+    console.log(value);
+    clearSelected();
   };
 
   return (
