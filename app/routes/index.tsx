@@ -65,8 +65,9 @@ export default function Index() {
                     </PanelGroup>
                 </div>
                 <div className="flex-grow bg-gray-50">
-                    <div className="relative w-full flex-shrink justify-center space-x-16 lg:max-w-sm">
+                    <div className="relative w-full flex-shrink justify-center mt-auto lg:max-w-sm">
                         <DropDown onChangeHandler={selectHandler} options={title_r} onSide="right"/>
+                        <button onClick={()=>{setDropDownSelect("Second"); setIsSide("left");}}>Set Panel</button>
                         <DropDown onChangeHandler={selectHandler} options={title_l} onSide="left"/>
                     </div>
                 </div>

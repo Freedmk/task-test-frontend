@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 
 type DropDownProps = {
-  onChangeHandler: (selectedValue: string) => void;
+  onChangeHandler: (selectedValue: string, selectedSide?: string) => void;
   options: string[];
   selectedOption?: string;
   side?: string;

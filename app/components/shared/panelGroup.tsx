@@ -45,7 +45,7 @@ export default function PanelGroup({
   return (
     <>
       <div
-        className={isOpen ? "flex h-12 w-56 bg-white" : "h-12 w-56"}
+        className={isOpen ? "flex h-12 w-56 bg-white" : "hidden"}
         style={{
           justifyContent: side === "left" ? "flex-start" : `${!isOpen ? "flex-end" : "flex-start"}`,
         }}
